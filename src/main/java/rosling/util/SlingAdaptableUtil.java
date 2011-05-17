@@ -1,6 +1,5 @@
 package rosling.util;
 
-import org.omg.CORBA.OBJECT_NOT_EXIST;
 import rosling.annotation.JcrNode;
 import rosling.annotation.JcrProp;
 
@@ -41,7 +40,7 @@ public class SlingAdaptableUtil {
         return null;
     }
 
-    public static <T> T convert(Node node, Class<T> clazz) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, RepositoryException {
+    public static <T> T adaptTo(Node node, Class<T> clazz) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException, RepositoryException {
         if (null == clazz.getAnnotation(JcrNode.class)) {
             return null;
         }
@@ -58,7 +57,7 @@ public class SlingAdaptableUtil {
                 final Method setter = getSetter(clazz, name, type);
                 setter.invoke(model, value);
             } else if (child != null) {
-                final Object childModel = convert(node.getNode(name), type);
+                final Object childModel = adaptTo(node.getNode(name), type);
                 final Method setter = getSetter(clazz, name, type);
                 setter.invoke(model, childModel);
             }
