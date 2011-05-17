@@ -25,7 +25,10 @@ import java.util.Map;
 @Service(Servlet.class)
 @Properties({@Property(name = "service.description", value = "blog entry"),
         @Property(name = "service.vendor", value = "The Apache Software Foundation"),
-        @Property(name = "sling.servlet.resourceTypes", value = {"rosling/blog/entry"})
+        @Property(name = "sling.servlet.resourceTypes", value = {"rosling_blog_entry"}),
+        @Property(name = "sling.servlet.extensions", value = {"html"}),
+        @Property(name = "sling.servlet.methods", value = {"GET"})
+
 })
 public class EntryServlet extends SlingAllMethodsServlet {
     @Reference
