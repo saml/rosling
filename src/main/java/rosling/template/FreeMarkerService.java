@@ -29,25 +29,27 @@ public class FreeMarkerService {
     @Reference
     private Settings settings;
 
-    private final Configuration cfg;
+    private static final Configuration cfg;
+
+    static {
+        cfg = new Configuration();
+
+    }
+
     private String templateDir;
 
     @Activate
-    private void activate(Map<String, ?> config) {
+    private void activate(Map<String, ?> config) throws IOException {
         templateDir = settings.getTemplateDir();
+        cfg.setDirectoryForTemplateLoading(new File(templateDir));
+        cfg.setObjectWrapper(new DefaultObjectWrapper());
         log.info("templateDir: {}", templateDir);
     }
 
-    public FreeMarkerService() throws IOException {
-        //settings = slingScriptHelper.getService(Settings.class);
-        cfg = new Configuration();
-        cfg.setDirectoryForTemplateLoading(new File(settings.getTemplateDir()));
-        cfg.setObjectWrapper(new DefaultObjectWrapper());
-    }
 
-    public void render(String templatePath, Object templateVars, PrintWriter out) throws IOException, TemplateException {
-        final Template tempalte = cfg.getTemplate(templatePath);
-        tempalte.process(templateVars, out);
-        out.flush();
+    public String render(String templatePath, Object templateVars, PrintWriter out) throws IOException, TemplateException {
+        final Template template = cfg.getTemplate(templatePath);
+        template.process(templateVars, out);
+        return template.toString();
     }
 }

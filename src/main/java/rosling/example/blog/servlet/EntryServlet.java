@@ -36,6 +36,8 @@ public class EntryServlet extends SlingAllMethodsServlet {
 
     protected void doGet(SlingHttpServletRequest req, SlingHttpServletResponse resp) throws IOException, ServletException {
         try {
+            resp.setCharacterEncoding("utf-8");
+            resp.setContentType("text/html");
             final Resource resource = req.getResource();
             final Node node = resource.adaptTo(Node.class);
             final Entry entry = SlingAdaptableUtil.adaptTo(node, Entry.class);
@@ -43,6 +45,7 @@ public class EntryServlet extends SlingAllMethodsServlet {
             map.put("entry", entry);
             final PrintWriter out = resp.getWriter();
             freeMarkerService.render("entry.ftl", entry, out);
+            out.flush();
         } catch (Exception e) {
             throw new ServletException(e);
         }

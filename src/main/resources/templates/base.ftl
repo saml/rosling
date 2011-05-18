@@ -15,6 +15,7 @@
 </#macro>
 
 <#macro additional_head>
+    <!-- more head-->
 </#macro>
 
 <#macro content>
@@ -43,7 +44,7 @@
         <@meta/>
         <@css/>
         <@js/>
-        <@addtional_head/>
+        <@additional_head/>
     </head>
     <body>
         <@body/>
