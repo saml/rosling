@@ -44,7 +44,7 @@ public class EntryServlet extends SlingAllMethodsServlet {
             final Map<String, Object> map = new HashMap<String, Object>();
             map.put("entry", entry);
             final PrintWriter out = resp.getWriter();
-            freeMarkerService.render("entry.ftl", entry, out);
+            freeMarkerService.render("entry.ftl", map, out);
             out.flush();
         } catch (Exception e) {
             throw new ServletException(e);
