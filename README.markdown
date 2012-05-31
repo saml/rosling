@@ -41,7 +41,7 @@ There is rosling.example.blog that implements Servlet that'll handle resources w
 
 So, you can create a resource with sling:resourceType = rosling_blog_entry
 
-    curl -u admin:admin -Fjcr:primaryType=nt:unstructured -Fsling:resourceType=rosling_blog_eauthor=saml -Ftitle="hello world" -Ftext="Cheeese" http://localhost:8080/content/test/entry
+    curl -u admin:admin -Fjcr:primaryType=nt:unstructured -Fsling:resourceType=rosling_blog_e -Fauthor=saml -Ftitle="hello world" -Ftext="Cheeese" http://localhost:8080/content/test/entry
 
 Then, go to the created resource
 
